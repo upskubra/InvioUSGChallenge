@@ -2,9 +2,12 @@ package com.example.inviousgchallenge
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.inviousgchallenge.adapter.ViewPagerAdapter
 import com.example.inviousgchallenge.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val fragmentsArray = arrayOf(
