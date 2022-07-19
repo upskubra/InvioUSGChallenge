@@ -16,6 +16,9 @@
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" >
 
+        <action
+            android:id="@+id/action_feedFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
     </fragment>
     <fragment
         android:id="@+id/trashFragment"
@@ -23,4 +26,9 @@
         android:label="fragment_trash"
         tools:layout="@layout/fragment_trash" >
     </fragment>
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.example.inviousgchallenge.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
 </navigation>
