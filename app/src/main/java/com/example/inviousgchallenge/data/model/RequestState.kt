@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.data
+package com.example.inviousgchallenge.data.model
 
 
 sealed class RequestState<T>{
