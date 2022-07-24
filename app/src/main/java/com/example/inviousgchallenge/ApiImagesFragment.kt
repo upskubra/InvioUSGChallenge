@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.inviousgchallenge.Util.OnDoubleClickListenerAdapter
-import com.example.inviousgchallenge.Util.NetworkResult
 import com.example.inviousgchallenge.adapter.ApiImagesRecyclerAdapter
 import com.example.inviousgchallenge.data.model.ApiImageItem
 import com.example.inviousgchallenge.databinding.FragmentApiImagesBinding
@@ -40,31 +39,26 @@ class ApiImagesFragment : Fragment() {
         apiImagesViewModel.getApiImages()
         viewLifecycleOwner.lifecycleScope.launch {
             apiImagesViewModel.apiImageState.collect {
-
-                val state = apiImagesViewModel.apiImageState.value
-                if (state.isLoading) {
+                if (it.isLoading) {
                     binding.apiProgressBar.visibility = View.VISIBLE
-                }
-                if (state.apiImageItemList.isNotEmpty()) {
-                    binding.apiProgressBar.visibility = View.VISIBLE
-                    initRecycler(state.apiImageItemList)
-                } else{
+                } else if (it.apiImageItemList.isNotEmpty()) {
                     binding.apiProgressBar.visibility = View.GONE
-                    Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show()
+                    initRecycler(it.apiImageItemList)
+                } else {
+                    Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show()
                 }
-
-
             }
         }
     }
-        private fun initRecycler(list: List<ApiImageItem>) {
-            binding.apiRecyclerView.apply {
-                adapter = ApiImagesRecyclerAdapter(list, object : OnDoubleClickListenerAdapter {
-                    override fun onClick(position: Int) {
-                        //for add cloud gallery
-                        Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-                    }
-                })
-            }
+
+    private fun initRecycler(list: List<ApiImageItem>) {
+        binding.apiRecyclerView.apply {
+            adapter = ApiImagesRecyclerAdapter(list, object : OnDoubleClickListenerAdapter {
+                override fun onClick(position: Int) {
+                    //for add cloud gallery
+                    Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
+}
