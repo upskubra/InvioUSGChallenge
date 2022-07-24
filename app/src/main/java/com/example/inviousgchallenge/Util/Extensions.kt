@@ -1,6 +1,8 @@
 package com.example.inviousgchallenge.Util
 
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import com.bumptech.glide.Glide
 
 inline fun View.setOnDoubleClickListener(
     // https://blog.mindorks.com/understanding-inline-noinline-and-crossinline-in-kotlin
@@ -11,4 +13,10 @@ inline fun View.setOnDoubleClickListener(
             onDoubleClick(v)
         }
     })
+}
+
+fun AppCompatImageView.loadUrl(url: String) {
+    Glide.with(this)
+        .load(url)
+        .into(this)
 }

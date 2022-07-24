@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.inviousgchallenge.R
 import com.example.inviousgchallenge.Util.OnDoubleClickListenerAdapter
+import com.example.inviousgchallenge.Util.loadUrl
 import com.example.inviousgchallenge.Util.setOnDoubleClickListener
 import com.example.inviousgchallenge.data.model.ApiImageItem
 import com.example.inviousgchallenge.databinding.ApiImagesItemBinding
 
 class ApiImagesRecyclerAdapter(
-    private val apiImageList: ArrayList<ApiImageItem>,
+    private val apiImageList: List<ApiImageItem>,
     private val onDoubleClickListenerAdapter: OnDoubleClickListenerAdapter
 ) : ListAdapter<ApiImageItem, ApiImagesRecyclerAdapter.ViewHolder>(DiffCallback()) {
 
@@ -35,6 +36,7 @@ class ApiImagesRecyclerAdapter(
         private val binding = ApiImagesItemBinding.bind(itemView)
         fun bind(apiImageItem: ApiImageItem) {
             binding.apiTitle.text = apiImageItem.name
+            apiImageItem.image?.url?.let { binding.apiImage.loadUrl(it) }
             binding.apiCardView.setOnDoubleClickListener {
                 onDoubleClickListenerAdapter.onClick(adapterPosition)
             }
