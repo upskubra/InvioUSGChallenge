@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="128dp"
-    android:id="@+id/feed_grid_layout"
-    android:layout_columnWeight="3"
-    android:layout_rowWeight="3"
-    android:layout_height="256dp">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/feed_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/feed_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_row="0"
-        android:padding="8dp"
-        android:layout_column="0"
-        android:orientation="vertical">
+        android:layout_height="160dp"
+        android:scaleType="centerCrop" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center" />
+    <TextView
+        android:id="@+id/feed_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:background="@color/blue_200"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/blue_400"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ImageView>
 
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</GridLayout>
+</androidx.cardview.widget.CardView>
