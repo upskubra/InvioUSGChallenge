@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/blue_300"
     android:layout_height="match_parent"
-    tools:context=".ApiImagesFragment">
+    tools:context=".ui.ApiImagesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/api_recyclerView"

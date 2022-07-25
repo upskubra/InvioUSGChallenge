@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.Util
+package com.example.inviousgchallenge.util
 
 
 sealed class NetworkResult<T>(val data: T? = null, val message: String? = null) {

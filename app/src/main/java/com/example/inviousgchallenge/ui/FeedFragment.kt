@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge
+package com.example.inviousgchallenge.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

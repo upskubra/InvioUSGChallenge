@@ -2,7 +2,7 @@ package com.example.inviousgchallenge.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.inviousgchallenge.Util.NetworkResult
+import com.example.inviousgchallenge.util.NetworkResult
 import com.example.inviousgchallenge.data.model.ApiImageItemListState
 import com.example.inviousgchallenge.domain.ApiImageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.inviousgchallenge.ApiImagesFragment
-import com.example.inviousgchallenge.FeedFragment
-import com.example.inviousgchallenge.TrashFragment
+import com.example.inviousgchallenge.ui.ApiImagesFragment
+import com.example.inviousgchallenge.ui.FeedFragment
+import com.example.inviousgchallenge.ui.TrashFragment
 
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :

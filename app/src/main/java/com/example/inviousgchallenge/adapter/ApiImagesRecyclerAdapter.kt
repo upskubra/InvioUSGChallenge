@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.inviousgchallenge.R
-import com.example.inviousgchallenge.Util.OnDoubleClickListenerAdapter
-import com.example.inviousgchallenge.Util.loadUrl
-import com.example.inviousgchallenge.Util.setOnDoubleClickListener
+import com.example.inviousgchallenge.util.OnDoubleClickListenerAdapter
+import com.example.inviousgchallenge.util.loadUrl
+import com.example.inviousgchallenge.util.setOnDoubleClickListener
 import com.example.inviousgchallenge.data.model.ApiImageItem
 import com.example.inviousgchallenge.databinding.ApiImagesItemBinding
 

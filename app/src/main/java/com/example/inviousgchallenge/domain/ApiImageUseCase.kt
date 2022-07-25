@@ -1,6 +1,6 @@
 package com.example.inviousgchallenge.domain
 
-import com.example.inviousgchallenge.Util.NetworkResult
+import com.example.inviousgchallenge.util.NetworkResult
 import com.example.inviousgchallenge.data.model.ApiImageResponse
 import com.example.inviousgchallenge.data.repository.ApiRemoteRepository
 import kotlinx.coroutines.flow.Flow

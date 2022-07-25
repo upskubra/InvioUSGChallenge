@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.Util
+package com.example.inviousgchallenge.util
 
 import android.os.SystemClock.elapsedRealtime
 import android.view.View
