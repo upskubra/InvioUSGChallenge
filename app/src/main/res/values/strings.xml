@@ -6,4 +6,7 @@
     <string name="image">image</string>
     <string name="write_a_description">write a description…</string>
     <string name="upload_image">upload image</string>
+    <string name="feed">Feed</string>
+    <string name="cat_image">Cat Image</string>
+    <string name="trash">Trash</string>
 </resources>

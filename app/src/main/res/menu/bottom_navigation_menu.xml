@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/feed"
+        android:title="@string/feed"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/apiImage"
+        android:title="@string/cat_image"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/trash"
+        android:title="@string/trash"
+        app:showAsAction="ifRoom" />
+
+</menu>
