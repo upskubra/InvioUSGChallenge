@@ -1,9 +1,8 @@
 package com.example.inviousgchallenge.data.model
 
 
-data class ApiImageItem(
-    val breedId: Int = 0,
+data class CatImageItem(
     val id: String?,
-    val image: ApiImage?,
+    val image: CatImage?,
     val name: String?,
 )

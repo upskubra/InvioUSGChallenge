@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.feedFragment)
                     true
                 }
-                R.id.apiImage -> {
+                R.id.catImage -> {
                     navController.navigate(R.id.apiImagesFragment)
                     true
                 }
@@ -41,10 +41,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.feedFragment)
                     true
                 }
-
             }
-
         }
-
     }
 }

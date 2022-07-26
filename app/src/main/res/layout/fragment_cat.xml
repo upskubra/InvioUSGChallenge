@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/blue_300"
     android:layout_height="match_parent"
-    tools:context=".ui.ApiImagesFragment">
+    android:background="@color/blue_300"
+    tools:context=".ui.cat.CatFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/api_recyclerView"
+        android:id="@+id/cat_recyclerView"
         android:layout_width="match_parent"
-        app:spanCount="3"
-        tools:listitem="@layout/api_images_item"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:layout_height="match_parent" />
+        app:spanCount="3"
+        tools:listitem="@layout/cat_images_item" />
+
     <ProgressBar
-        android:id="@+id/api_progress_bar"
+        android:id="@+id/cat_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

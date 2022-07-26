@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.ui
+package com.example.inviousgchallenge.ui.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +12,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
     private lateinit var binding: FragmentFeedBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         // set up the binding
         binding = FragmentFeedBinding.inflate(inflater, container, false)

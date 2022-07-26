@@ -1,7 +1,7 @@
 package com.example.inviousgchallenge.di
 
 import com.example.inviousgchallenge.BuildConfig
-import com.example.inviousgchallenge.data.network.ApiService
+import com.example.inviousgchallenge.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

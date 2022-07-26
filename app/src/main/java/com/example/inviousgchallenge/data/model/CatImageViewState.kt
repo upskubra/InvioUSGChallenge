@@ -1,7 +1,7 @@
 package com.example.inviousgchallenge.data.model
 
-data class ApiImageItemListState(
+data class CatImageViewState(
     val isLoading: Boolean = false,
-    val apiImageItemList: ApiImageResponse = ApiImageResponse(),
+    val catList: CatImageResponse = CatImageResponse(),
     val error: String = ""
 )

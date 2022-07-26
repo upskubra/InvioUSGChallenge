@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/apiImagesFragment"
-        android:name="com.example.inviousgchallenge.ui.ApiImagesFragment"
+        android:name="com.example.inviousgchallenge.ui.cat.CatFragment"
         android:label="fragment_api_images"
-        tools:layout="@layout/fragment_api_images"/>
+        tools:layout="@layout/fragment_cat" />
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.example.inviousgchallenge.ui.FeedFragment"
+        android:name="com.example.inviousgchallenge.ui.feed.FeedFragment"
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed">
 
@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/trashFragment"
-        android:name="com.example.inviousgchallenge.ui.TrashFragment"
+        android:name="com.example.inviousgchallenge.ui.trash.TrashFragment"
         android:label="fragment_trash"
-        tools:layout="@layout/fragment_trash"/>
+        tools:layout="@layout/fragment_trash" />
     <fragment
         android:id="@+id/uploadFragment"
-        android:name="com.example.inviousgchallenge.ui.UploadFragment"
+        android:name="com.example.inviousgchallenge.ui.upload.UploadFragment"
         android:label="fragment_upload"
         tools:layout="@layout/fragment_upload" />
 </navigation>

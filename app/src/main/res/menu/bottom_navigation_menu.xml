@@ -5,7 +5,7 @@
         android:title="@string/feed"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/apiImage"
+        android:id="@+id/catImage"
         android:title="@string/cat_image"
         app:showAsAction="ifRoom" />
     <item
