@@ -4,11 +4,10 @@ import android.net.Uri
 import com.example.inviousgchallenge.data.model.Image
 import com.example.inviousgchallenge.util.Constants.UID
 import com.example.inviousgchallenge.util.FirebaseState
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.component1
+import com.google.firebase.storage.ktx.component2
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
@@ -20,21 +19,29 @@ class StorageDataSourceImpl @Inject constructor(
 ) : StorageDataSource {
     override suspend fun getImages(): Flow<FirebaseState<ArrayList<Image>>> = flow {
         emit(FirebaseState.Loading)
-        val result = database.collection("image")
-            .whereEqualTo("uid", UID)
-            .orderBy("date", Query.Direction.DESCENDING)
-            .get()
-        if (result.isSuccessful) {
+        val result = storage.reference.child("images")
+
+
+        try {
             val images = arrayListOf<Image>()
-            for (document in result.result) {
-                val image = document.toObject(Image::class.java)
-                images.add(image)
-            }
+            result.listAll()
+                .addOnSuccessListener { (_, prefixes) ->
+                    prefixes.forEach { prefix ->
+                        val image = prefix.child("${prefix.name}.png")
+
+                        image.downloadUrl.addOnSuccessListener {
+                            images.add(Image(prefix.name, it.toString()))
+                        }
+                    }
+                }
+
             emit(FirebaseState.Success(images))
-        } else {
-            emit(FirebaseState.Failure(result.exception?.localizedMessage))
+        } catch (e: Exception) {
+            emit(FirebaseState.Failure(e.localizedMessage))
+            println(e.localizedMessage)
         }
     }
+
 
     override suspend fun addImageToFirebaseStorage(imageUri: Uri) = flow {
         try {

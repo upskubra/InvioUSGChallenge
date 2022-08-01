@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.inviousgchallenge.databinding.FragmentUploadBinding
+import com.example.inviousgchallenge.util.FirebaseState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -64,7 +65,6 @@ class UploadFragment : Fragment() {
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                // There are no request codes
                 val data: Intent? = result.data
                 if (data != null) {
                     imageUri = data.data!!
