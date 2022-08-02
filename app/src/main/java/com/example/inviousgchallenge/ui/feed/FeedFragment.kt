@@ -45,9 +45,8 @@ class FeedFragment : Fragment() {
             feedViewModel.getFeedImages()
             feedViewModel.signIn()
             feedViewModel.authState.collect {
-                if (it.signIn) {
+                if (it.signIn == true) {
                     updateImageList()
-
                 } else {
                     Toast.makeText(context, "Sign in failed", Toast.LENGTH_SHORT).show()
                 }
@@ -58,11 +57,11 @@ class FeedFragment : Fragment() {
     private fun updateImageList() {
         viewLifecycleOwner.lifecycleScope.launch {
             feedViewModel.feedImageState.collect {
-                if (it.isLoading) {
+                if (it.loading) {
                     // binding.feedProgressBar.visibility = View.VISIBLE
-                } else if (it.feedImageList?.isNotEmpty() == true && it.isLoading) {
+                } else if (it.imageList?.isNotEmpty() == true && it.loading) {
                     // binding.catProgressBar.visibility = View.GONE
-                    initRecycler(it.feedImageList!!)
+                    initRecycler(it.imageList!!)
                 } else {
                     Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show()
                 }

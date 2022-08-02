@@ -3,7 +3,7 @@ package com.example.inviousgchallenge.ui.upload
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.inviousgchallenge.data.model.FirebaseViewState
+import com.example.inviousgchallenge.data.model.UploadViewState
 import com.example.inviousgchallenge.data.repository.StorageRepository
 import com.example.inviousgchallenge.util.FirebaseState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,33 +18,47 @@ import javax.inject.Inject
 class UploadViewModel @Inject constructor(
     private val storageRepository: StorageRepository,
 ) : ViewModel() {
-    private var _addImageStorageState = MutableStateFlow(FirebaseViewState())
-    var addImageStorageState: StateFlow<FirebaseViewState> =
+    private var _addImageStorageState = MutableStateFlow(UploadViewState())
+    var addImageStorageState: StateFlow<UploadViewState> =
         _addImageStorageState.asStateFlow()
 
 
     fun addImageStorage(imageUri: Uri) = viewModelScope.launch {
         storageRepository.addImageToFirebaseStorage(imageUri).collect { response ->
             when (response) {
+                is FirebaseState.Success -> {
+                    val list =
+                        _addImageStorageState.value.uriList?.toMutableList() ?: mutableListOf()
+                    response.data?.let { uri ->
+                        _addImageStorageState.update {
+                            it.copy(
+                                loading = false,
+                                success = true,
+                                uri = uri
+                            )
+                        }
+                        list.add(uri)
+                    }
+                    _addImageStorageState.value = addImageStorageState.value.copy(uriList = list)
+                }
                 is FirebaseState.Loading ->
                     _addImageStorageState.update {
-                        it.copy(isLoading = true)
+                        it.copy(loading = true)
 
-                    }
-                is FirebaseState.Success ->
-                    response.data?.let {
-                        FirebaseViewState(
-                            isSuccess = true,
-                            uri = it,
-                            isLoading = false
-                        )
                     }
                 is FirebaseState.Failure ->
                     _addImageStorageState.update {
-                        it.copy(isLoading = false, error = "Error")
+                        it.copy(loading = false, error = "Error")
                     }
             }
         }
+    }
+
+    fun imageUrlConsumed(uri: Uri) {
+
+        val list = addImageStorageState.value.uriList?.toMutableList()
+        list?.remove(uri)
+        _addImageStorageState.value = addImageStorageState.value.copy(uriList = list)
     }
 }
 

@@ -2,7 +2,7 @@ package com.example.inviousgchallenge.ui.feed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.inviousgchallenge.data.model.FirebaseViewState
+import com.example.inviousgchallenge.data.model.FeedViewState
 import com.example.inviousgchallenge.data.repository.StorageRepository
 import com.example.inviousgchallenge.util.FirebaseState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,11 +19,11 @@ import javax.inject.Inject
 class FeedViewModel @Inject constructor(private val storageRepository: StorageRepository) :
     ViewModel() {
 
-    private var _feedImageState = MutableStateFlow(FirebaseViewState())
-    var feedImageState: StateFlow<FirebaseViewState> = _feedImageState.asStateFlow()
+    private var _feedImageState = MutableStateFlow(FeedViewState())
+    var feedImageState: StateFlow<FeedViewState> = _feedImageState.asStateFlow()
 
-    private val _authState = MutableStateFlow(FirebaseViewState())
-    val authState: StateFlow<FirebaseViewState> = _authState.asStateFlow()
+    private val _authState = MutableStateFlow(FeedViewState())
+    val authState: StateFlow<FeedViewState> = _authState.asStateFlow()
 
     suspend fun signIn() {
         withContext(Dispatchers.IO) {
@@ -33,10 +33,10 @@ class FeedViewModel @Inject constructor(private val storageRepository: StorageRe
                         is FirebaseState.Success -> {
                             _authState.value =
                                 state.data?.let {
-                                    FirebaseViewState(
+                                    FeedViewState(
                                         user = it,
                                         signIn = true,
-                                        isLoading = false
+                                        loading = false
                                     )
                                 }!!
                             getFeedImages()
@@ -44,15 +44,15 @@ class FeedViewModel @Inject constructor(private val storageRepository: StorageRe
                         is FirebaseState.Failure -> {
                             _authState.update {
                                 it.copy(
-                                    isLoading = false,
+                                    loading = false,
                                     signIn = false,
-                                    error = it.error ?: "An unexpected error occurred"
+                                    error = it.error
                                 )
                             }
                         }
                         is FirebaseState.Loading -> {
                             _authState.update {
-                                it.copy(isLoading = true)
+                                it.copy(loading = true)
                             }
                         }
                     }
@@ -61,32 +61,31 @@ class FeedViewModel @Inject constructor(private val storageRepository: StorageRe
         }
     }
 
-
     suspend fun getFeedImages() =
-        withContext(Dispatchers.IO) {              // Dispatchers.IO (main-safety block)
+        withContext(Dispatchers.IO) {
             viewModelScope.launch {
                 storageRepository.getImages().collect { result ->
                     when (result) {
                         is FirebaseState.Success -> {
                             _feedImageState.value =
                                 result.data?.let {
-                                    FirebaseViewState(
-                                        feedImageList = it,
-                                        isLoading = false
+                                    FeedViewState(
+                                        imageList = it,
+                                        loading = false
                                     )
                                 }!!
                         }
                         is FirebaseState.Failure -> {
                             _feedImageState.update {
                                 it.copy(
-                                    isLoading = false,
+                                    loading = false,
                                     error = result.e ?: "An unexpected error occurred"
                                 )
                             }
                         }
                         is FirebaseState.Loading -> {
                             _feedImageState.update {
-                                it.copy(isLoading = true)
+                                it.copy(loading = true)
                             }
                         }
                     }
