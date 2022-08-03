@@ -23,8 +23,8 @@ class UploadViewModel @Inject constructor(
         _addImageStorageState.asStateFlow()
 
 
-    fun addImageStorage(imageUri: Uri) = viewModelScope.launch {
-        storageRepository.addImageToFirebaseStorage(imageUri).collect { response ->
+    fun addImageStorage(imageUri: Uri, description: String) = viewModelScope.launch {
+        storageRepository.addImageToFirebaseStorage(imageUri, description).collect { response ->
             when (response) {
                 is FirebaseState.Success -> {
                     val list =
@@ -34,7 +34,8 @@ class UploadViewModel @Inject constructor(
                             it.copy(
                                 loading = false,
                                 success = true,
-                                uri = uri
+                                uri = uri,
+                                description = description,
                             )
                         }
                         list.add(uri)

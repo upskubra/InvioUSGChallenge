@@ -58,9 +58,9 @@ class FeedFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             feedViewModel.feedImageState.collect {
                 if (it.loading) {
-                    // binding.feedProgressBar.visibility = View.VISIBLE
-                } else if (it.imageList?.isNotEmpty() == true && it.loading) {
-                    // binding.catProgressBar.visibility = View.GONE
+                    binding.feedProgressBar.visibility = View.VISIBLE
+                } else if (it.imageList != null) {
+                    binding.feedProgressBar.visibility = View.GONE
                     initRecycler(it.imageList!!)
                 } else {
                     Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show()

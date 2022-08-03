@@ -7,5 +7,6 @@ data class UploadViewState(
     var error: String = "",
     var success: Boolean? = false,
     var uri: Uri? = null,
+    var description: String? = "",
     var uriList: List<Uri>? = null,
 )

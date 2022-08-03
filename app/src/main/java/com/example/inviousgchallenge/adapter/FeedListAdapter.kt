@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.inviousgchallenge.data.model.Image
 import com.example.inviousgchallenge.databinding.FeedImagesItemBinding
 import com.example.inviousgchallenge.util.OnDoubleClickListenerAdapter
@@ -24,17 +23,15 @@ class FeedListAdapter(
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val currentItem = getItem(position)
-        holder.bind(currentItem)
+        holder.bind(imageList[position])
     }
 
     class ImageViewHolder(private val binding: FeedImagesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(image: Image) {
             binding.apply {
-                Glide.with(this.root)
-                    .load(image.uri)
-                    .into(feedImage)
+                image.uri?.let { feedImage.loadUrl(it) }
+                feedTitle.text = image.id
             }
         }
     }

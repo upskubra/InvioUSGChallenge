@@ -20,8 +20,9 @@ class StorageRepositoryImpl @Inject constructor(
 
     override suspend fun addImageToFirebaseStorage(
         imageUri: Uri,
+        description: String
     ): Flow<FirebaseState<Uri>> {
-        return storageDataSource.addImageToFirebaseStorage(imageUri)
+        return storageDataSource.addImageToFirebaseStorage(imageUri, description)
     }
 
     override fun anonymousSignIn(): Flow<FirebaseState<FirebaseUser>> {

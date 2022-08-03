@@ -62,31 +62,31 @@ class FeedViewModel @Inject constructor(private val storageRepository: StorageRe
     }
 
     suspend fun getFeedImages() =
-        withContext(Dispatchers.IO) {
-            viewModelScope.launch {
-                storageRepository.getImages().collect { result ->
-                    when (result) {
-                        is FirebaseState.Success -> {
-                            _feedImageState.value =
-                                result.data?.let {
-                                    FeedViewState(
-                                        imageList = it,
-                                        loading = false
-                                    )
-                                }!!
-                        }
-                        is FirebaseState.Failure -> {
+        viewModelScope.launch {
+            storageRepository.getImages().collect { result ->
+                when (result) {
+                    is FirebaseState.Success -> {
+                        result.data?.let { list ->
                             _feedImageState.update {
                                 it.copy(
+                                    imageList = list,
                                     loading = false,
-                                    error = result.e ?: "An unexpected error occurred"
                                 )
                             }
                         }
-                        is FirebaseState.Loading -> {
-                            _feedImageState.update {
-                                it.copy(loading = true)
-                            }
+
+                    }
+                    is FirebaseState.Failure -> {
+                        _feedImageState.update {
+                            it.copy(
+                                loading = false,
+                                error = result.e ?: "An unexpected error occurred"
+                            )
+                        }
+                    }
+                    is FirebaseState.Loading -> {
+                        _feedImageState.update {
+                            it.copy(loading = true)
                         }
                     }
                 }

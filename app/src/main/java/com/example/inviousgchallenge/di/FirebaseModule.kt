@@ -48,9 +48,8 @@ object FirebaseModule {
     @Singleton
     fun providesStorageDataSource(
         storage: FirebaseStorage,
-        database: FirebaseFirestore
     ): StorageDataSource {
-        return StorageDataSourceImpl(storage, database)
+        return StorageDataSourceImpl(storage)
     }
 
     @Provides

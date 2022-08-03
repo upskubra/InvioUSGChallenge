@@ -38,7 +38,8 @@ class UploadFragment : Fragment() {
             selectImage()
         }
         binding.uploadButton.setOnClickListener {
-            uploadViewModel.addImageStorage(imageUri)
+            val description = binding.uploadDescription.text.toString()
+            uploadViewModel.addImageStorage(imageUri, description)
         }
     }
 
