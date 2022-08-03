@@ -63,6 +63,7 @@ class FeedFragment : Fragment() {
                     binding.feedProgressBar.visibility = View.GONE
                     initRecycler(it.imageList!!)
                 } else {
+                    binding.feedRecyclerView.visibility = View.GONE
                     Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show()
                 }
             }
