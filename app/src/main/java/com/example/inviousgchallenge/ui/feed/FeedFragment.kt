@@ -40,10 +40,8 @@ class FeedFragment : Fragment() {
 
     private fun updateFeedState() {
         viewLifecycleOwner.lifecycleScope.launch {
-            feedViewModel.signIn()
             feedViewModel.getFeedImages()
         }
-
         binding.addImageButton.setOnClickListener {
             val action = FeedFragmentDirections.actionFeedFragmentToUploadFragment()
             Navigation.findNavController(it).navigate(action)

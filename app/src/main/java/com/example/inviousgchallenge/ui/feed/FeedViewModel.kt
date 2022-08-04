@@ -21,39 +21,6 @@ class FeedViewModel @Inject constructor(
     private var _feedImageState = MutableStateFlow(FeedViewState())
     var feedImageState: StateFlow<FeedViewState> = _feedImageState.asStateFlow()
 
-    private val _authState = MutableStateFlow(FeedViewState())
-    val authState: StateFlow<FeedViewState> = _authState.asStateFlow()
-
-    suspend fun signIn() {
-        storageRepository.anonymousSignIn().collect { state ->
-            when (state) {
-                is FirebaseState.Success -> {
-                    _authState.value =
-                        state.data?.let {
-                            FeedViewState(
-                                user = it,
-                                signIn = true,
-                                loading = false
-                            )
-                        }!!
-                }
-                is FirebaseState.Failure -> {
-                    _authState.update {
-                        it.copy(
-                            loading = false,
-                            signIn = false,
-                            error = it.error
-                        )
-                    }
-                }
-                is FirebaseState.Loading -> {
-                    _authState.update {
-                        it.copy(loading = true)
-                    }
-                }
-            }
-        }
-    }
 
     suspend fun getFeedImages() =
         storageRepository.getImages().collect { result ->
