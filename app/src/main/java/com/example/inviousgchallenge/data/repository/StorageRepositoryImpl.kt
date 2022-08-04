@@ -24,8 +24,4 @@ class StorageRepositoryImpl @Inject constructor(
     ): Flow<FirebaseState<Uri>> {
         return storageDataSource.addImageToFirebaseStorage(imageUri, description)
     }
-
-    override fun anonymousSignIn(): Flow<FirebaseState<FirebaseUser>> {
-        return authDataSource.anonymousSignIn()
-    }
 }

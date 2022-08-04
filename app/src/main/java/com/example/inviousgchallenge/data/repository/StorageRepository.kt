@@ -3,7 +3,6 @@ package com.example.inviousgchallenge.data.repository
 import android.net.Uri
 import com.example.inviousgchallenge.data.model.Image
 import com.example.inviousgchallenge.util.FirebaseState
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
 
 interface StorageRepository {
@@ -12,6 +11,4 @@ interface StorageRepository {
         imageUri: Uri,
         description: String
     ): Flow<FirebaseState<Uri>>
-
-    fun anonymousSignIn(): Flow<FirebaseState<FirebaseUser>>
 }
