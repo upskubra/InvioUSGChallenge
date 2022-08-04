@@ -30,8 +30,8 @@ class CatFragment : Fragment() {
     }
 
     private fun updateCatState() {
-        catViewModel.getCatImages()
         viewLifecycleOwner.lifecycleScope.launch {
+            catViewModel.getCatImages()
             catViewModel.catImageState.collect {
                 if (it.isLoading) {
                     binding.catProgressBar.visibility = View.VISIBLE

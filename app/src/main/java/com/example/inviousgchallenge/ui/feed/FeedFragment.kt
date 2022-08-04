@@ -34,27 +34,23 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateFeedState()
+        observeFeedImages()
+
+    }
+
+    private fun updateFeedState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            feedViewModel.signIn()
+            feedViewModel.getFeedImages()
+        }
+
         binding.addImageButton.setOnClickListener {
             val action = FeedFragmentDirections.actionFeedFragmentToUploadFragment()
             Navigation.findNavController(it).navigate(action)
         }
     }
 
-    private fun updateFeedState() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            feedViewModel.getFeedImages()
-            feedViewModel.signIn()
-            feedViewModel.authState.collect {
-                if (it.signIn == true) {
-                    updateImageList()
-                } else {
-                    Toast.makeText(context, "Sign in failed", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun updateImageList() {
+    private fun observeFeedImages() {
         viewLifecycleOwner.lifecycleScope.launch {
             feedViewModel.feedImageState.collect {
                 if (it.loading) {

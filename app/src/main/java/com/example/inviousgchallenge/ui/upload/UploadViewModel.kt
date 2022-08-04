@@ -1,29 +1,28 @@
 package com.example.inviousgchallenge.ui.upload
 
+import android.app.Application
 import android.net.Uri
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.inviousgchallenge.data.model.UploadViewState
 import com.example.inviousgchallenge.data.repository.StorageRepository
+import com.example.inviousgchallenge.ui.BaseViewModel
 import com.example.inviousgchallenge.util.FirebaseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UploadViewModel @Inject constructor(
-    private val storageRepository: StorageRepository,
-) : ViewModel() {
+    private val storageRepository: StorageRepository, application: Application,
+) : BaseViewModel(application) {
     private var _addImageStorageState = MutableStateFlow(UploadViewState())
     var addImageStorageState: StateFlow<UploadViewState> =
         _addImageStorageState.asStateFlow()
 
 
-    fun addImageStorage(imageUri: Uri, description: String) = viewModelScope.launch {
+    suspend fun addImageStorage(imageUri: Uri, description: String) =
         storageRepository.addImageToFirebaseStorage(imageUri, description).collect { response ->
             when (response) {
                 is FirebaseState.Success -> {
@@ -53,7 +52,6 @@ class UploadViewModel @Inject constructor(
                     }
             }
         }
-    }
 
     fun imageUrlConsumed(uri: Uri) {
 
@@ -62,4 +60,5 @@ class UploadViewModel @Inject constructor(
         _addImageStorageState.value = addImageStorageState.value.copy(uriList = list)
     }
 }
+
 

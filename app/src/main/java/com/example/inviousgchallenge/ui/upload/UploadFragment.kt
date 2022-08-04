@@ -39,7 +39,9 @@ class UploadFragment : Fragment() {
         }
         binding.uploadButton.setOnClickListener {
             val description = binding.uploadDescription.text.toString()
-            uploadViewModel.addImageStorage(imageUri, description)
+            viewLifecycleOwner.lifecycleScope.launch {
+                uploadViewModel.addImageStorage(imageUri, description)
+            }
         }
     }
 
