@@ -1,7 +1,7 @@
 package com.example.inviousgchallenge.ui.feed
 
 import android.app.Application
-import com.example.inviousgchallenge.data.model.FeedViewState
+import com.example.inviousgchallenge.data.model.ViewStates.FeedViewState
 import com.example.inviousgchallenge.data.repository.StorageRepository
 import com.example.inviousgchallenge.ui.BaseViewModel
 import com.example.inviousgchallenge.util.FirebaseState
@@ -22,8 +22,8 @@ class FeedViewModel @Inject constructor(
     var feedImageState: StateFlow<FeedViewState> = _feedImageState.asStateFlow()
 
 
-    suspend fun getFeedImages() =
-        storageRepository.getImages().collect { result ->
+    suspend fun getFeedImages(user: String) =
+        storageRepository.getImages(user).collect { result ->
             when (result) {
                 is FirebaseState.Success -> {
                     result.data?.let { list ->
@@ -31,6 +31,7 @@ class FeedViewModel @Inject constructor(
                             it.copy(
                                 imageList = list,
                                 loading = false,
+                                user = user
                             )
                         }
                     }

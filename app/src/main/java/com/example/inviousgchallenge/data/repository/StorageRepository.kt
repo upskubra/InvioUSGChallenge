@@ -6,9 +6,10 @@ import com.example.inviousgchallenge.util.FirebaseState
 import kotlinx.coroutines.flow.Flow
 
 interface StorageRepository {
-    suspend fun getImages(): Flow<FirebaseState<ArrayList<Image>>>
+    suspend fun getImages(user: String): Flow<FirebaseState<ArrayList<Image>>>
     suspend fun addImageToFirebaseStorage(
         imageUri: Uri,
-        description: String
+        description: String,
+        user: String
     ): Flow<FirebaseState<Uri>>
 }

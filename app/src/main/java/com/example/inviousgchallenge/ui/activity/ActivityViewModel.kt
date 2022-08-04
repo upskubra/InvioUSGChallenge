@@ -1,18 +1,28 @@
-package com.example.inviousgchallenge.ui
+package com.example.inviousgchallenge.ui.activity
 
 import android.app.Application
-import com.example.inviousgchallenge.data.model.FeedViewState
+import com.example.inviousgchallenge.data.model.ViewStates.AuthViewState
 import com.example.inviousgchallenge.data.repository.AuthRepository
+import com.example.inviousgchallenge.ui.BaseViewModel
 import com.example.inviousgchallenge.util.FirebaseState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
-class ActivityViewModel(application: Application, private val authRepository: AuthRepository) :
-    BaseViewModel(application) {
-    private val _authState = MutableStateFlow(FeedViewState())
-    val authState: StateFlow<FeedViewState> = _authState.asStateFlow()
+@HiltViewModel
+class ActivityViewModel @Inject constructor(
+    private val authRepository: AuthRepository, application: Application
+) : BaseViewModel(application) {
+    private val _authState = MutableStateFlow(AuthViewState())
+    val authState: StateFlow<AuthViewState> = _authState.asStateFlow()
+
+    suspend fun getUser(): String {
+        signIn()
+        return authState.value.user?.uid!!
+    }
 
     suspend fun signIn() {
         authRepository.anonymousSignIn().collect { state ->
@@ -20,18 +30,17 @@ class ActivityViewModel(application: Application, private val authRepository: Au
                 is FirebaseState.Success -> {
                     _authState.value =
                         state.data?.let {
-                            FeedViewState(
+                            AuthViewState(
                                 user = it,
-                                signIn = true,
                                 loading = false
                             )
                         }!!
+
                 }
                 is FirebaseState.Failure -> {
                     _authState.update {
                         it.copy(
                             loading = false,
-                            signIn = false,
                             error = it.error
                         )
                     }

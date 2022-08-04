@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.ui
+package com.example.inviousgchallenge.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -29,5 +29,9 @@
         android:id="@+id/uploadFragment"
         android:name="com.example.inviousgchallenge.ui.upload.UploadFragment"
         android:label="fragment_upload"
-        tools:layout="@layout/fragment_upload" />
+        tools:layout="@layout/fragment_upload" >
+        <action
+            android:id="@+id/action_uploadFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
 </navigation>

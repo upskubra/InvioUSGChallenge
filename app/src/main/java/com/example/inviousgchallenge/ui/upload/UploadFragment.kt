@@ -10,9 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.example.inviousgchallenge.databinding.FragmentUploadBinding
+import com.example.inviousgchallenge.ui.activity.ActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,6 +23,7 @@ import kotlinx.coroutines.launch
 class UploadFragment : Fragment() {
     private lateinit var binding: FragmentUploadBinding
     private val uploadViewModel: UploadViewModel by viewModels()
+    private val sessionViewModel by activityViewModels<ActivityViewModel>()
     private lateinit var imageUri: Uri
 
     override fun onCreateView(
@@ -40,7 +44,15 @@ class UploadFragment : Fragment() {
         binding.uploadButton.setOnClickListener {
             val description = binding.uploadDescription.text.toString()
             viewLifecycleOwner.lifecycleScope.launch {
-                uploadViewModel.addImageStorage(imageUri, description)
+                sessionViewModel.authState.value.user?.uid.let { user ->
+                    uploadViewModel.addImageStorage(
+                        imageUri,
+                        description,
+                        user!!
+                    )
+                }
+                val action = UploadFragmentDirections.actionUploadFragmentToFeedFragment()
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }

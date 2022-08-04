@@ -12,9 +12,9 @@ import javax.inject.Inject
 class StorageDataSourceImpl @Inject constructor(
     private val storage: FirebaseStorage,
 ) : StorageDataSource {
-    override suspend fun getImages(): Flow<FirebaseState<ArrayList<Image>>> = flow {
+    override suspend fun getImages(user: String): Flow<FirebaseState<ArrayList<Image>>> = flow {
         emit(FirebaseState.Loading)
-        val result = storage.reference.child("images")
+        val result = storage.reference.child(user)
         val images = ArrayList<Image>()
         try {
             result.listAll().await().items.forEach {
@@ -29,11 +29,15 @@ class StorageDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun addImageToFirebaseStorage(imageUri: Uri, description: String) = flow {
+    override suspend fun addImageToFirebaseStorage(
+        imageUri: Uri,
+        description: String,
+        user: String
+    ) = flow {
         try {
             emit(FirebaseState.Loading)
             val downloadUrl = storage.reference
-                .child("images")
+                .child(user)
                 .child(description)
                 .putFile(imageUri).await()
                 .storage.downloadUrl.await()
