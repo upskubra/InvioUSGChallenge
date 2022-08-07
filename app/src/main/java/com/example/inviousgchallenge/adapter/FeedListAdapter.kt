@@ -9,6 +9,7 @@ import com.example.inviousgchallenge.data.model.Image
 import com.example.inviousgchallenge.databinding.FeedImagesItemBinding
 import com.example.inviousgchallenge.util.OnDoubleClickListenerAdapter
 import com.example.inviousgchallenge.util.loadUrl
+import com.example.inviousgchallenge.util.setOnDoubleClickListener
 
 class FeedListAdapter(
     private val imageList: List<Image>,
@@ -26,12 +27,15 @@ class FeedListAdapter(
         holder.bind(imageList[position])
     }
 
-    class ImageViewHolder(private val binding: FeedImagesItemBinding) :
+    inner class ImageViewHolder(private val binding: FeedImagesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(image: Image) {
             binding.apply {
                 image.uri?.let { feedImage.loadUrl(it) }
                 feedTitle.text = image.id
+                deleteButton.setOnDoubleClickListener {
+                    onDoubleClickListenerAdapter.onClick(adapterPosition)
+                }
             }
         }
     }

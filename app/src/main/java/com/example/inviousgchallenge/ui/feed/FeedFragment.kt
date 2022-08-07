@@ -88,9 +88,27 @@ class FeedFragment : Fragment() {
         binding.feedRecyclerView.apply {
             adapter = FeedListAdapter(list, object : OnDoubleClickListenerAdapter {
                 override fun onClick(position: Int) {
-                    Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+                    // delete icon click delete image from the list
+                    val id = list[position].id
+                    val user = list[position].userId
+                    deleteImage(user!!, id!!)
+                    // ask this
+                    updateFeedState(user)
                 }
             })
+        }
+    }
+
+    private fun deleteImage(user: String, imageId: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            feedViewModel.deleteImage(user, imageId)
+            feedViewModel.deleteImageState.collect {
+                if (it.isDeleted == true) {
+                    Toast.makeText(context, "Image Deleted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Image can not Deleted", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
