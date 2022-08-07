@@ -22,4 +22,11 @@ class StorageRepositoryImpl @Inject constructor(
     ): Flow<FirebaseState<Uri>> {
         return storageDataSource.addImageToFirebaseStorage(imageUri, description, user)
     }
+
+    override suspend fun deleteImage(
+        user: String,
+        imageId: String
+    ): Flow<FirebaseState<Boolean>> {
+        return storageDataSource.deleteImage(user, imageId)
+    }
 }
