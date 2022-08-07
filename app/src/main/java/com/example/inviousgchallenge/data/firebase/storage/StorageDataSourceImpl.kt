@@ -18,9 +18,9 @@ class StorageDataSourceImpl @Inject constructor(
         val images = ArrayList<Image>()
         try {
             result.listAll().await().items.forEach {
-                val name = it.name
+                val name = it.name // description
                 val uri = it.downloadUrl.await().toString()
-                images.add(Image(name, uri))
+                images.add(Image(user, name, uri))
             }
             emit(FirebaseState.Success(images))
         } catch (e: Exception) {
@@ -44,6 +44,24 @@ class StorageDataSourceImpl @Inject constructor(
             emit(FirebaseState.Success(downloadUrl))
         } catch (e: Exception) {
             emit(FirebaseState.Failure(e.localizedMessage))
+        }
+    }
+
+    override suspend fun deleteImage(
+        user: String,
+        imageId: String
+    ): Flow<FirebaseState<Boolean>> {
+        return flow {
+            emit(FirebaseState.Loading)
+            val result = storage.reference
+                .child(user)
+                .child(imageId)
+                .delete().isComplete
+            if (result) {
+                emit(FirebaseState.Success(true))
+            } else {
+                emit(FirebaseState.Failure("Error deleting image"))
+            }
         }
     }
 }

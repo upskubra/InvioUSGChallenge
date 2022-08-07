@@ -12,4 +12,9 @@ interface StorageRepository {
         description: String,
         user: String
     ): Flow<FirebaseState<Uri>>
+
+    suspend fun deleteImage(
+        user: String,
+        imageId: String
+    ): Flow<FirebaseState<Boolean>>
 }
