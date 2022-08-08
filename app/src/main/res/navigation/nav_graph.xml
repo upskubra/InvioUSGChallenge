@@ -9,7 +9,11 @@
         android:id="@+id/apiImagesFragment"
         android:name="com.example.inviousgchallenge.ui.cat.CatFragment"
         android:label="fragment_api_images"
-        tools:layout="@layout/fragment_cat" />
+        tools:layout="@layout/fragment_cat" >
+        <action
+            android:id="@+id/action_apiImagesFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.example.inviousgchallenge.ui.feed.FeedFragment"
@@ -33,5 +37,9 @@
         <action
             android:id="@+id/action_uploadFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
+        <argument
+            android:name="catUrl"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

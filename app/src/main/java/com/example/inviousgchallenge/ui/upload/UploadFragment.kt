@@ -14,10 +14,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.inviousgchallenge.databinding.FragmentUploadBinding
 import com.example.inviousgchallenge.ui.activity.ActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class UploadFragment : Fragment() {
@@ -25,6 +28,7 @@ class UploadFragment : Fragment() {
     private val uploadViewModel: UploadViewModel by viewModels()
     private val sessionViewModel by activityViewModels<ActivityViewModel>()
     private lateinit var imageUri: Uri
+    private val args: UploadFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +36,14 @@ class UploadFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentUploadBinding.inflate(inflater)
+
+        args.catUrl?.let {
+            Glide.with(this).load(it).into(binding.uploadImageView)
+            // not working
+            val path =
+                Uri.parse("android.resource://com.example.inviousgchallenge/" + binding.uploadImageView)
+            imageUri = path
+        }
         updateUI()
         initObservers()
         return binding.root
