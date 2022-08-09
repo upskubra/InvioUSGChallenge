@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setNavigationBar()
+    }
+    private fun setNavigationBar() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -31,11 +34,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.catImage -> {
                     navController.navigate(R.id.apiImagesFragment)
                     true
-                }
-                R.id.trash -> {
-                    navController.navigate(R.id.trashFragment)
-                    true
-
                 }
                 else -> {
                     navController.navigate(R.id.feedFragment)

@@ -8,9 +8,6 @@
         android:id="@+id/catImage"
         android:title="@string/cat_image"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/trash"
-        android:title="@string/trash"
-        app:showAsAction="ifRoom" />
+
 
 </menu>
