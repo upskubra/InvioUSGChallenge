@@ -4,10 +4,10 @@ import com.example.inviousgchallenge.data.firebase.auth.AuthDataSource
 import com.example.inviousgchallenge.data.firebase.auth.AuthDataSourceImpl
 import com.example.inviousgchallenge.data.firebase.storage.StorageDataSource
 import com.example.inviousgchallenge.data.firebase.storage.StorageDataSourceImpl
-import com.example.inviousgchallenge.data.repository.AuthRepository
-import com.example.inviousgchallenge.data.repository.AuthRepositoryImpl
-import com.example.inviousgchallenge.data.repository.StorageRepository
-import com.example.inviousgchallenge.data.repository.StorageRepositoryImpl
+import com.example.inviousgchallenge.data.repository.auth.AuthRepository
+import com.example.inviousgchallenge.data.repository.auth.AuthRepositoryImpl
+import com.example.inviousgchallenge.data.repository.storage.StorageRepository
+import com.example.inviousgchallenge.data.repository.storage.StorageRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore

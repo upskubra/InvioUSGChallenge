@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.data.repository
+package com.example.inviousgchallenge.data.repository.cat
 
 import com.example.inviousgchallenge.data.model.CatImageResponse
 import com.example.inviousgchallenge.util.NetworkResult

@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.data.repository
+package com.example.inviousgchallenge.data.repository.storage
 
 import android.net.Uri
 import com.example.inviousgchallenge.data.model.Image

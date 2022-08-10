@@ -3,8 +3,8 @@ package com.example.inviousgchallenge.di
 import com.example.inviousgchallenge.data.remote.ApiService
 import com.example.inviousgchallenge.data.remote.CatDataSource
 import com.example.inviousgchallenge.data.remote.CatDataSourceImpl
-import com.example.inviousgchallenge.data.repository.CatRepository
-import com.example.inviousgchallenge.data.repository.CatRepositoryImpl
+import com.example.inviousgchallenge.data.repository.cat.CatRepository
+import com.example.inviousgchallenge.data.repository.cat.CatRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

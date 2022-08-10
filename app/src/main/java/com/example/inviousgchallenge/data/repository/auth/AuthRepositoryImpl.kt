@@ -1,4 +1,4 @@
-package com.example.inviousgchallenge.data.repository
+package com.example.inviousgchallenge.data.repository.auth
 
 import com.example.inviousgchallenge.data.firebase.auth.AuthDataSource
 import com.example.inviousgchallenge.util.FirebaseState

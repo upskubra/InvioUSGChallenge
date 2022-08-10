@@ -2,7 +2,7 @@ package com.example.inviousgchallenge.ui.activity
 
 import android.app.Application
 import com.example.inviousgchallenge.data.model.ViewStates.AuthViewState
-import com.example.inviousgchallenge.data.repository.AuthRepository
+import com.example.inviousgchallenge.data.repository.auth.AuthRepository
 import com.example.inviousgchallenge.ui.BaseViewModel
 import com.example.inviousgchallenge.util.FirebaseState
 import dagger.hilt.android.lifecycle.HiltViewModel

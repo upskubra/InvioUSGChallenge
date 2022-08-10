@@ -3,7 +3,7 @@ package com.example.inviousgchallenge.ui.upload
 import android.app.Application
 import android.net.Uri
 import com.example.inviousgchallenge.data.model.ViewStates.UploadViewState
-import com.example.inviousgchallenge.data.repository.StorageRepository
+import com.example.inviousgchallenge.data.repository.storage.StorageRepository
 import com.example.inviousgchallenge.ui.BaseViewModel
 import com.example.inviousgchallenge.util.FirebaseState
 import dagger.hilt.android.lifecycle.HiltViewModel

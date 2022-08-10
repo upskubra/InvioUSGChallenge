@@ -2,7 +2,7 @@ package com.example.inviousgchallenge.ui.cat
 
 import android.app.Application
 import com.example.inviousgchallenge.data.model.CatImageViewState
-import com.example.inviousgchallenge.data.repository.CatRepository
+import com.example.inviousgchallenge.data.repository.cat.CatRepository
 import com.example.inviousgchallenge.ui.BaseViewModel
 import com.example.inviousgchallenge.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
