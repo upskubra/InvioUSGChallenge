@@ -9,13 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
-import com.example.inviousgchallenge.R
 import com.example.inviousgchallenge.adapter.CatListAdapter
 import com.example.inviousgchallenge.data.model.CatImageItem
 import com.example.inviousgchallenge.databinding.FragmentCatBinding
 import com.example.inviousgchallenge.util.OnDoubleClickListenerAdapter
-import com.example.inviousgchallenge.util.loadUrl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -55,7 +52,7 @@ class CatFragment : Fragment() {
                 override fun onClick(position: Int) {
                     //for add cloud gallery
                     val url = list[position].image?.url
-                  val action = CatFragmentDirections.actionApiImagesFragmentToUploadFragment(url)
+                    val action = CatFragmentDirections.actionApiImagesFragmentToUploadFragment(url)
                     Navigation.findNavController(binding.root).navigate(action)
                     Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
                 }

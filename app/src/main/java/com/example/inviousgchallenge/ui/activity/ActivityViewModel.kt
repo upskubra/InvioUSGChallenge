@@ -19,11 +19,6 @@ class ActivityViewModel @Inject constructor(
     private val _authState = MutableStateFlow(AuthViewState())
     val authState: StateFlow<AuthViewState> = _authState.asStateFlow()
 
-    suspend fun getUser(): String {
-        signIn()
-        return authState.value.user?.uid!!
-    }
-
     suspend fun signIn() {
         authRepository.anonymousSignIn().collect { state ->
             when (state) {
@@ -35,7 +30,6 @@ class ActivityViewModel @Inject constructor(
                                 loading = false
                             )
                         }!!
-
                 }
                 is FirebaseState.Failure -> {
                     _authState.update {

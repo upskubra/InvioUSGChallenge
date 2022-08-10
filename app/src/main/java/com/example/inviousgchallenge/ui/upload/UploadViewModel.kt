@@ -21,38 +21,39 @@ class UploadViewModel @Inject constructor(
     var addImageStorageState: StateFlow<UploadViewState> =
         _addImageStorageState.asStateFlow()
 
-
-    suspend fun addImageStorage(imageUri: Uri, description: String, user:String) =
-        storageRepository.addImageToFirebaseStorage(imageUri, description, user).collect { response ->
-            when (response) {
-                is FirebaseState.Success -> {
-                    val list =
-                        _addImageStorageState.value.uriList?.toMutableList() ?: mutableListOf()
-                    response.data?.let { uri ->
-                        _addImageStorageState.update {
-                            it.copy(
-                                loading = false,
-                                success = true,
-                                uri = uri,
-                                user = user,
-                                description = description,
-                            )
+    suspend fun addImageStorage(imageUri: Uri, description: String, user: String) =
+        storageRepository.addImageToFirebaseStorage(imageUri, description, user)
+            .collect { response ->
+                when (response) {
+                    is FirebaseState.Success -> {
+                        val list =
+                            _addImageStorageState.value.uriList?.toMutableList() ?: mutableListOf()
+                        response.data?.let { uri ->
+                            _addImageStorageState.update {
+                                it.copy(
+                                    loading = false,
+                                    success = true,
+                                    uri = uri,
+                                    user = user,
+                                    description = description,
+                                )
+                            }
+                            list.add(uri)
                         }
-                        list.add(uri)
+                        _addImageStorageState.value =
+                            addImageStorageState.value.copy(uriList = list)
                     }
-                    _addImageStorageState.value = addImageStorageState.value.copy(uriList = list)
-                }
-                is FirebaseState.Loading ->
-                    _addImageStorageState.update {
-                        it.copy(loading = true)
+                    is FirebaseState.Loading ->
+                        _addImageStorageState.update {
+                            it.copy(loading = true)
 
-                    }
-                is FirebaseState.Failure ->
-                    _addImageStorageState.update {
-                        it.copy(loading = false, error = "Error")
-                    }
+                        }
+                    is FirebaseState.Failure ->
+                        _addImageStorageState.update {
+                            it.copy(loading = false, error = "Error")
+                        }
+                }
             }
-        }
 
     fun imageUrlConsumed(uri: Uri) {
 

@@ -7,5 +7,4 @@ data class AuthViewState(
     var success: Boolean? = false,
     var loading: Boolean? = false,
     var error: String? = null
-) {
-}
+)

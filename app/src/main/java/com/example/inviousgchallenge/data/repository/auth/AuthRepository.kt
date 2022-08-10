@@ -5,5 +5,5 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-     fun anonymousSignIn(): Flow<FirebaseState<FirebaseUser>>
+    fun anonymousSignIn(): Flow<FirebaseState<FirebaseUser>>
 }

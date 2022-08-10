@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         setNavigationBar()
     }
+
     private fun setNavigationBar() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

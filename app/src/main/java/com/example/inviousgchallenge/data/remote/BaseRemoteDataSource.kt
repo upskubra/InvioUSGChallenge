@@ -17,7 +17,6 @@ open class BaseRemoteDataSource {
             }
         }.catch {
             emit(NetworkResult.Error(it.message ?: it.toString()))
-
         }.onStart {
             emit(NetworkResult.Loading())
         }.flowOn(Dispatchers.IO)

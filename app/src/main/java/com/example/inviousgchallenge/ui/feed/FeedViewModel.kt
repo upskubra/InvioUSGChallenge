@@ -25,7 +25,6 @@ class FeedViewModel @Inject constructor(
     private var _deleteImageState = MutableStateFlow(DeleteViewState())
     var deleteImageState: StateFlow<DeleteViewState> = _deleteImageState.asStateFlow()
 
-
     suspend fun getFeedImages(user: String) =
         storageRepository.getImages(user).collect { result ->
             when (result) {
@@ -39,7 +38,6 @@ class FeedViewModel @Inject constructor(
                             )
                         }
                     }
-
                 }
                 is FirebaseState.Failure -> {
                     _feedImageState.update {

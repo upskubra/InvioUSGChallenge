@@ -8,5 +8,4 @@ data class FeedViewState(
     var success: Boolean? = false,
     var user: String? = null,
     var imageList: ArrayList<Image>? = arrayListOf(),
-) {
-}
+)

@@ -44,7 +44,6 @@ class CatListAdapter(
 
     }
 
-    // add cloud gallery item to the list
     class DiffCallback : DiffUtil.ItemCallback<CatImageItem>() {
         override fun areItemsTheSame(oldItem: CatImageItem, newItem: CatImageItem): Boolean {
             return oldItem.id == newItem.id
