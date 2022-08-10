@@ -25,11 +25,6 @@
             app:destination="@id/uploadFragment" />
     </fragment>
     <fragment
-        android:id="@+id/trashFragment"
-        android:name="com.example.inviousgchallenge.ui.trash.TrashFragment"
-        android:label="fragment_trash"
-        tools:layout="@layout/fragment_trash" />
-    <fragment
         android:id="@+id/uploadFragment"
         android:name="com.example.inviousgchallenge.ui.upload.UploadFragment"
         android:label="fragment_upload"
