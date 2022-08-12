@@ -52,7 +52,8 @@ class CatFragment : Fragment() {
                 override fun onClick(position: Int) {
                     //for add cloud gallery
                     val url = list[position].image?.url
-                    val action = CatFragmentDirections.actionApiImagesFragmentToUploadFragment(url)
+                    val name = list[position].name
+                    val action = CatFragmentDirections.actionApiImagesFragmentToUploadFragment(url,name )
                     Navigation.findNavController(binding.root).navigate(action)
                     Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
                 }

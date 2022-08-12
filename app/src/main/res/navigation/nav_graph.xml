@@ -36,5 +36,9 @@
             android:name="catUrl"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="catName"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

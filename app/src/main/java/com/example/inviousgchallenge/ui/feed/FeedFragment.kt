@@ -44,7 +44,7 @@ class FeedFragment : Fragment() {
             feedViewModel.getFeedImages(user)
         }
         binding.addImageButton.setOnClickListener {
-            val action = FeedFragmentDirections.actionFeedFragmentToUploadFragment(null)
+            val action = FeedFragmentDirections.actionFeedFragmentToUploadFragment(null, null)
             Navigation.findNavController(it).navigate(action)
         }
     }
